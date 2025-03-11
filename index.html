@@ -199,6 +199,19 @@
         function contactUs() {
             window.location.href = "https://wa.link/hk68ck";
         }
+
+        const slider = document.getElementById('slider');
+        let index = 0;
+
+        function slideImages() {
+            index++;
+            if (index >= slider.children.length) {
+                index = 0;
+            }
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        setInterval(slideImages, 3000);
     </script>
     </script>
 </body>
