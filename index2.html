@@ -23,9 +23,24 @@
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Open Sans', sans-serif;
         }
+        .slider-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            max-width: 2xl;
+            margin: 0 auto;
+        }
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slider img {
+            width: 100%;
+            flex-shrink: 0;
+        }
     </style>
-
 </head>
+
 <body class="bg-black text-gray-200 min-h-screen text-xs">
     <header class="bg-[#484752] text-white text-center py-2 shadow-md">
         <div class="text-xl font-bold">Join Now & Earn ₹1000+ Daily Without Investment!💸</div>
@@ -58,27 +73,25 @@
             </div>
         </section>
 
-
-             <!-- Customer Reviews Section -->
-             <section class="text-center mb-16">
-                <h2 class="text-3xl font-extrabold mb-6">Customer Reviews🌟</h2>
-                <div class="relative w-full max-w-2xl mx-auto overflow-hidden rounded-xl shadow-lg">
-                    <div class="flex transition-transform duration-1000 ease-in-out" id="slider">
-                        <img src="/SCREENSHOTS/IMG1 (2).PNG" alt="Customer Review 1" class="w-full h-auto flex-shrink-0">
-                        <img src="/SCREENSHOTS/IMG2.PNG" alt="Customer Review 2" class="w-full h-auto flex-shrink-0">
-                        <img src="/SCREENSHOTS/IMG3 (2).PNG" alt="Customer Review 3" class="w-full h-auto flex-shrink-0">
-                        <img src="/SCREENSHOTS/IMG4.PNG" alt="Customer Review 3" class="w-full h-auto flex-shrink-0">
-                        <img src="/SCREENSHOTS/IMG5.PNG" alt="Customer Review 3" class="w-full h-auto flex-shrink-0">
-                        <img src="/SCREENSHOTS/IMG6.png" alt="Customer Review 3" class="w-full h-auto flex-shrink-0">
-
-                    </div>
+        <!-- Customer Reviews Section -->
+        <section class="text-center mb-16">
+            <h2 class="text-3xl font-extrabold mb-6">Customer Reviews🌟</h2>
+            <div class="slider-container">
+                <div class="slider" id="slider">
+                    <img src="./SCREENSHOTS/IMG1 (2).PNG" alt="Customer Review 1">
+                    <img src="./SCREENSHOTS/IMG2.PNG" alt="Customer Review 2">
+                    <img src="./SCREENSHOTS/IMG3 (2).PNG" alt="Customer Review 3">
+                    <img src="./SCREENSHOTS/IMG4.PNG" alt="Customer Review 4">
+                    <img src="./SCREENSHOTS/IMG5.PNG" alt="Customer Review 5">
+                    <img src="./SCREENSHOTS/IMG6.png" alt="Customer Review 6">
                 </div>
-                <div class="flex justify-center mt-10">
-                    <button onclick="contactUs()" class="border border-white text-white py-2 px-6 rounded-md text-base font-semibold hover:bg-white hover:text-black transition">
-                        Contact Us
-                    </button>
-                </div>
-            </section>
+            </div>
+            <div class="flex justify-center mt-10">
+                <button onclick="contactUs()" class="border border-white text-white py-2 px-6 rounded-md text-base font-semibold hover:bg-white hover:text-black transition">
+                    Contact Us
+                </button>
+            </div>
+        </section>
 
         <img src="image-one.png" alt="" class="w-full h-auto rounded-xl shadow-lg">
 
@@ -107,15 +120,48 @@
             <p class="mt-8 font-bold text-xl">💰 1500 young traders are already making money – Why not you?</p>
         </section>
 
+        <img src="image-three.png" alt="" class="w-full h-auto rounded-xl shadow-lg">
+
         <div class="flex justify-center mt-10">
             <button onclick="contactUs()" class="border border-white text-white py-2 px-6 rounded-md text-base font-semibold hover:bg-white hover:text-black transition">
                 Contact Us
             </button>
         </div>
-
-   
-
     </main>
+
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="flex flex-col items-center mb-4">
+                <h2 class="text-base font-semibold mb-2">Subscribe to our newsletter</h2>
+                <div class="flex w-full max-w-sm">
+                    <input type="email" placeholder="Email" class="flex-grow px-4 py-2 border border-gray-600 bg-gray-700 text-white">
+                    <button class="px-4 py-2 bg-gray-600 text-white hover:bg-gray-500 transition"><i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="flex justify-center space-x-4 mb-4">
+                <a href="https://www.tiktok.com" target="_blank" class="text-white hover:text-gray-400"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com" target="_blank" class="text-white hover:text-gray-400"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.twitter.com" target="_blank" class="text-white hover:text-gray-400"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.pinterest.com" target="_blank" class="text-white hover:text-gray-400"><i class="fab fa-pinterest"></i></a>
+            </div>
+            <div class="text-center text-xs text-gray-400">
+                © 2025, Zero Investment Earnings. All rights reserved. · <a href="https://www.shopify.com/legal/privacy" target="_blank" class="hover:underline">Privacy policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+        (function(c, l, a, r, i, t, y) {
+            c[a] = c[a] || function() {
+                (c[a].q = c[a].q || []).push(arguments)
+            };
+            t = l.createElement(r);
+            t.async = 1;
+            t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0];
+            y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "qhh4f4x23x");
+    </script>
 
     <script>
         function contactUs() {
@@ -124,6 +170,8 @@
 
         const slider = document.getElementById('slider');
         let index = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
 
         function slideImages() {
             index++;
@@ -133,7 +181,34 @@
             slider.style.transform = `translateX(-${index * 100}%)`;
         }
 
-        setInterval(slideImages, 3000);
+        let autoSlideInterval = setInterval(slideImages, 3000);
+
+        slider.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        });
+
+        slider.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].clientX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const swipeDifference = touchStartX - touchEndX;
+
+            if (swipeDifference > swipeThreshold) {
+                index = (index + 1) % slider.children.length;
+            } else if (swipeDifference < -swipeThreshold) {
+                index = (index - 1 + slider.children.length) % slider.children.length;
+            }
+
+            slider.style.transform = `translateX(-${index * 100}%)`;
+
+            // Reset the auto-slide interval
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(slideImages, 3000);
+        }
     </script>
 </body>
+
 </html>

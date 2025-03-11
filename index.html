@@ -25,6 +25,24 @@
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Open Sans', sans-serif;
         }
+
+        .slider-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    max-width: 2xl;
+    margin: 0 auto;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slider img {
+    width: 100%;
+    flex-shrink: 0;
+}
     </style>
 
 
@@ -97,26 +115,25 @@
             </div>
         </section>
 
-             <!-- Customer Reviews Section -->
-             <section class="text-center mb-16">
-                <h2 class="text-3xl font-extrabold mb-6">Customer Reviews🌟</h2>
-                <div class="relative w-full max-w-2xl mx-auto overflow-hidden rounded-xl shadow-lg">
-                    <div class="flex transition-transform duration-1000 ease-in-out" id="slider">
-                        <img src="./SCREENSHOTS/IMG1 (2).PNG" alt="Customer Review 1" class="w-full h-auto flex-shrink-0">
-                        <img src="./SCREENSHOTS/IMG2.PNG" alt="Customer Review 2" class="w-full h-auto flex-shrink-0">
-                        <img src="./SCREENSHOTS/IMG3 (2).PNG" alt="Customer Review 3" class="w-full h-auto flex-shrink-0">
-                        <img src="./SCREENSHOTS/IMG4.PNG" alt="Customer Review 3" class="w-full h-auto flex-shrink-0">
-                        <img src="./SCREENSHOTS/IMG5.PNG" alt="Customer Review 3" class="w-full h-auto flex-shrink-0">
-                        <img src="./SCREENSHOTS/IMG6.png" alt="Customer Review 3" class="w-full h-auto flex-shrink-0">
-
-                    </div>
-                </div>
-                <div class="flex justify-center mt-10">
-                    <button onclick="contactUs()" class="border border-white text-white py-2 px-6 rounded-md text-base font-semibold hover:bg-white hover:text-black transition">
-                        Contact Us
-                    </button>
-                </div>
-            </section>
+       <!-- Customer Reviews Section -->
+       <section class="text-center mb-16">
+        <h2 class="text-3xl font-extrabold mb-6">Customer Reviews🌟</h2>
+        <div class="slider-container">
+            <div class="slider" id="slider">
+                <img src="./SCREENSHOTS/IMG1 (2).PNG" alt="Customer Review 1">
+                <img src="./SCREENSHOTS/IMG2.PNG" alt="Customer Review 2">
+                <img src="./SCREENSHOTS/IMG3 (2).PNG" alt="Customer Review 3">
+                <img src="./SCREENSHOTS/IMG4.PNG" alt="Customer Review 4">
+                <img src="./SCREENSHOTS/IMG5.PNG" alt="Customer Review 5">
+                <img src="./SCREENSHOTS/IMG6.png" alt="Customer Review 6">
+            </div>
+        </div>
+        <div class="flex justify-center mt-10">
+            <button onclick="contactUs()" class="border border-white text-white py-2 px-6 rounded-md text-base font-semibold hover:bg-white hover:text-black transition">
+                Contact Us
+            </button>
+        </div>
+    </section>
 
         <img src="image-one.png" alt="" class="w-full h-auto rounded-xl shadow-lg">
 
@@ -201,17 +218,53 @@
         }
 
         const slider = document.getElementById('slider');
-        let index = 0;
+let index = 0;
+let touchStartX = 0;
+let touchEndX = 0;
 
-        function slideImages() {
-            index++;
-            if (index >= slider.children.length) {
-                index = 0;
-            }
-            slider.style.transform = `translateX(-${index * 100}%)`;
-        }
+// Function for automatic sliding
+function slideImages() {
+    index++;
+    if (index >= slider.children.length) {
+        index = 0;
+    }
+    slider.style.transform = `translateX(-${index * 100}%)`;
+}
 
-        setInterval(slideImages, 3000);
+// Start automatic sliding
+let autoSlideInterval = setInterval(slideImages, 3000);
+
+// Touch event listeners for swipe functionality
+slider.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX; // Record the initial touch position
+});
+
+slider.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].clientX; // Record the final touch position
+    handleSwipe(); // Handle the swipe gesture
+});
+
+// Function to handle swipe gestures
+function handleSwipe() {
+    const swipeThreshold = 50; // Minimum swipe distance to trigger a slide
+    const swipeDifference = touchStartX - touchEndX; // Calculate the swipe distance
+
+    // Swipe left (next slide)
+    if (swipeDifference > swipeThreshold) {
+        index = (index + 1) % slider.children.length;
+    }
+    // Swipe right (previous slide)
+    else if (swipeDifference < -swipeThreshold) {
+        index = (index - 1 + slider.children.length) % slider.children.length;
+    }
+
+    // Update the slider position
+    slider.style.transform = `translateX(-${index * 100}%)`;
+
+    // Reset the auto-slide interval after manual swipe
+    clearInterval(autoSlideInterval);
+    autoSlideInterval = setInterval(slideImages, 3000);
+}
     </script>
     </script>
 </body>
