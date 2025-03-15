@@ -23,3 +23,21 @@ transition: transform 0.5s ease-in-out;
 width: 100%;
 flex-shrink: 0;
 }
+
+.mb-10 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    background-color: #333; /* Dark background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Adjusted padding for a smaller box */
+    border-radius: 8px; /* Rounded corners */
+    border: 2px solid white; /* White border */
+    text-align: center; /* Centers the text */
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Light shadow */
+    display: flex; /* Uses flexbox for proper centering */
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    max-width: 80%; /* Limits the box width */
+    margin-left: auto; /* Centers the box */
+    margin-right: auto; /* Centers the box */
+}
