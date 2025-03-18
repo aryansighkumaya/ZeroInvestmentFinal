@@ -69,14 +69,17 @@
             <ul class="flex flex-col sm:flex-row gap-8 justify-center">
                 <li class="bg-gray-900 p-8 rounded-2xl shadow-xl text-center w-full sm:w-2/5">
                     <p class="font-bold text-base mb-4">STEP 1: Getting Started 🎬</p>
-                    <audio controls class="w-full">
+                    <p id="loading1" class="text-yellow-400">Loading...</p> <!-- Loading text -->
+                    <audio id="audio1" controls class="w-full" disabled>
                         <source src="AAFREEN STEP 1.mp3" type="audio/mp3" />
                         Your browser does not support the audio element.
                     </audio>
                 </li>
+                
                 <li class="bg-gray-900 p-8 rounded-2xl shadow-xl text-center w-full sm:w-2/5">
                     <p class="font-bold text-base mb-4">STEP 2: Building Knowledge 📚</p>
-                    <audio controls class="w-full">
+                    <p id="loading2" class="text-yellow-400">Loading...</p> <!-- Loading text -->
+                    <audio id="audio2" controls class="w-full" disabled>
                         <source src="AAFREEN STEP 2.mp3" type="audio/mp3" />
                         Your browser does not support the audio element.
                     </audio>
@@ -260,6 +263,26 @@ function handleSwipe() {
     clearInterval(autoSlideInterval);
     autoSlideInterval = setInterval(slideImages, 3000);
 }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    function checkAudioLoaded(audioId, loadingId) {
+        let audio = document.getElementById(audioId);
+        let loadingText = document.getElementById(loadingId);
+
+        audio.oncanplaythrough = function () {
+            loadingText.style.display = "none"; // Hide loading text
+            audio.removeAttribute("disabled"); // Enable play button
+        };
+
+        audio.onwaiting = function () {
+            loadingText.style.display = "block"; // Show loading text when buffering
+        };
+    }
+
+    checkAudioLoaded("audio1", "loading1");
+    checkAudioLoaded("audio2", "loading2");
+});
     </script>
     </script>
 </body>
