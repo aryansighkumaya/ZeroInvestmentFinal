@@ -206,14 +206,41 @@
     </script>
 
 </head>
+
+<!-- Modal for the question -->
+<div id="audioConfirmationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-gray-900 p-8 rounded-lg text-center">
+        <h2 class="text-xl font-bold mb-4">Have you listened to the audios completely?</h2>
+        <div class="flex justify-center space-x-4">
+            <button onclick="handleYes()" class="bg-green-500 text-white px-4 py-2 rounded-md">Yes</button>
+            <button onclick="handleNo()" class="bg-red-500 text-white px-4 py-2 rounded-md">No</button>
+        </div>
+    </div>
+</div>
 <body>
     
 
     <script>
-        function contactUs() {
-            window.location.href = "https://wa.link/7bnpcn";
+      // Function to handle the "Contact Us" button click
+      function contactUs() {
+            const modal = document.getElementById('audioConfirmationModal');
+            modal.classList.remove('hidden');
         }
 
+        // Function to handle "Yes" button click
+        function handleYes() {
+            window.location.href = "https://wa.link/7bnpcn"; // Redirect to WhatsApp
+            const modal = document.getElementById('audioConfirmationModal');
+            modal.classList.add('hidden');
+        }
+
+        // Function to handle "No" button click
+        function handleNo() {
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+            alert('Please listen to the audios carefully before proceeding!'); // Show warning
+            const modal = document.getElementById('audioConfirmationModal');
+            modal.classList.add('hidden');
+        }
         
         const slider = document.getElementById('slider');
 let index = 0;
