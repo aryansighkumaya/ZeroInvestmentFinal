@@ -232,6 +232,12 @@ src="https://www.facebook.com/tr?id=886154463717364&ev=PageView&noscript=1"
 
         // Function to handle "Yes" button click
         function handleYes() {
+ fbq('track', 'Lead', {
+        value: 1.00,
+        currency: 'INR'
+    });
+
+
             window.location.href = "https://t.me/ankitkumars2002";
             
             const modal = document.getElementById('audioConfirmationModal');
